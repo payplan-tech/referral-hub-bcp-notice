@@ -4,9 +4,10 @@
 # up when other things are down, so there is nothing to install, nothing to
 # compile and nothing that can fail but the upload.
 #
-# One-time setup in the repository: Settings -> Pages -> Build and deployment
-# -> Source: "GitHub Actions". Until that is set the workflow runs and the
-# deploy step fails, which is the one failure mode worth knowing about.
+# `enablement: true` turns Pages on for the repository if it is off, so there
+# is no setting to remember. If that step fails with "Get Pages site failed",
+# the workflow's token is not allowed to enable it and someone has to set
+# Settings -> Pages -> Source: "GitHub Actions" by hand, once.
 name: Deploy
 
 on:
@@ -35,6 +36,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+        with:
+          # Turns Pages on if it is off, so a fresh clone of this repo deploys
+          # without anyone opening Settings. In an incident the fewer manual
+          # steps between a commit and a live page the better.
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           # The repository root, minus what the action excludes itself.
