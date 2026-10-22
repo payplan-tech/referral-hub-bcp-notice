@@ -69,18 +69,18 @@ body {
   padding-block: 20px;
 }
 
-/* The site's own logo, committed here rather than loaded from Sanity's CDN:
-   a continuity page should not depend on another service to look right. Its
-   natural size is 144x42 and it is a single colour, cobalt-900. */
 .logo {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--primary);
+  text-decoration: none;
   display: inline-block;
-  line-height: 0;
 }
 
-.logo img {
-  display: block;
-  width: 144px;
-  height: 42px;
+.logo sup {
+  font-size: 10px;
+  vertical-align: super;
 }
 
 /* --- The status message, which is the whole point of the page ------------ */
